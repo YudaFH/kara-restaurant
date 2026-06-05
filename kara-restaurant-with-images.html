@@ -24,7 +24,7 @@
   --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:92px}
+html{scroll-behavior:smooth;scroll-padding-top:132px}
 
 /* GRAIN */
 body{
@@ -282,7 +282,7 @@ nav.scrolled{
 }
 
 /* ── DISHES — HORIZONTAL SCROLL ── */
-.dishes{padding:100px 0 100px 48px;overflow:hidden}
+.dishes{padding:100px 0 100px 48px;overflow:hidden;scroll-margin-top:132px}
 .dishes-header{
   display:flex;align-items:flex-end;justify-content:space-between;
   padding-right:48px;margin-bottom:56px;
@@ -349,7 +349,7 @@ nav.scrolled{
   font-size:22px;color:var(--paper);
 }
 .dish-tag{
-  position:absolute;top:20px;left:20px;
+  position:absolute;top:34px;left:20px;z-index:3;
   font-size:9px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;
   color:var(--ink);background:var(--rust);
   padding:5px 12px;
@@ -358,12 +358,13 @@ nav.scrolled{
 }
 .dish-card:hover .dish-tag{opacity:1;transform:translateY(0) rotate(0deg)}
 .dish-card::after{
-  content:'View details';position:absolute;right:20px;top:20px;
+  content:'View details';position:absolute;right:20px;top:34px;z-index:3;
   font-size:9px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;
   color:var(--paper);border:1px solid rgba(240,235,227,.25);
   background:rgba(10,9,6,.34);backdrop-filter:blur(10px);
   padding:7px 10px;opacity:0;transform:translateY(-4px);
   transition:opacity .3s ease,transform .3s ease;
+  pointer-events:none;
 }
 .dish-card:hover::after{opacity:1;transform:translateY(0)}
 
@@ -1450,26 +1451,26 @@ document.querySelectorAll('.r,.reveal-mask').forEach(el=>obs.observe(el));
 
 /* drag scroll on dishes */
 const ds=document.getElementById('dishScroll');
-let isDown=false,startX=0,scrollL=0,didDrag=false;
+let isDown=false,startX=0,scrollL=0,ignoreNextDishClick=false;
 if(ds){
   ds.addEventListener('pointerdown',e=>{
     isDown=true;
-    didDrag=false;
+    ignoreNextDishClick=false;
     ds.setPointerCapture(e.pointerId);
     startX=e.clientX;
     scrollL=ds.scrollLeft;
   });
   ds.addEventListener('pointerup',()=>{
     isDown=false;
-    if(didDrag)setTimeout(()=>{didDrag=false;},0);
+    if(ignoreNextDishClick)setTimeout(()=>{ignoreNextDishClick=false;},120);
   });
   ds.addEventListener('pointercancel',()=>{
     isDown=false;
-    didDrag=false;
+    ignoreNextDishClick=false;
   });
   ds.addEventListener('pointermove',e=>{
     if(!isDown)return;
-    if(Math.abs(e.clientX-startX)>8)didDrag=true;
+    if(Math.abs(e.clientX-startX)>8)ignoreNextDishClick=true;
     e.preventDefault();
     ds.scrollLeft=scrollL-(e.clientX-startX)*1.35;
   });
@@ -1595,8 +1596,7 @@ document.querySelectorAll('.dish-card').forEach(card=>{
   card.setAttribute('role','button');
   card.setAttribute('tabindex','0');
   card.addEventListener('click',()=>{
-    if(didDrag){
-      didDrag=false;
+    if(ignoreNextDishClick){
       return;
     }
     const title=cleanTitle(card.querySelector('.dish-name').innerText);
