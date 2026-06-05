@@ -1459,8 +1459,14 @@ if(ds){
     startX=e.clientX;
     scrollL=ds.scrollLeft;
   });
-  ds.addEventListener('pointerup',()=>{isDown=false;});
-  ds.addEventListener('pointercancel',()=>{isDown=false;});
+  ds.addEventListener('pointerup',()=>{
+    isDown=false;
+    if(didDrag)setTimeout(()=>{didDrag=false;},0);
+  });
+  ds.addEventListener('pointercancel',()=>{
+    isDown=false;
+    didDrag=false;
+  });
   ds.addEventListener('pointermove',e=>{
     if(!isDown)return;
     if(Math.abs(e.clientX-startX)>8)didDrag=true;
@@ -1589,7 +1595,10 @@ document.querySelectorAll('.dish-card').forEach(card=>{
   card.setAttribute('role','button');
   card.setAttribute('tabindex','0');
   card.addEventListener('click',()=>{
-    if(didDrag)return;
+    if(didDrag){
+      didDrag=false;
+      return;
+    }
     const title=cleanTitle(card.querySelector('.dish-name').innerText);
     const base=detailData[title]||{};
     openDetail({
