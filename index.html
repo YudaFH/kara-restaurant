@@ -357,16 +357,18 @@ nav.scrolled{
   opacity:0;transition:all .35s;
 }
 .dish-card:hover .dish-tag{opacity:1;transform:translateY(0) rotate(0deg)}
-.dish-card::after{
-  content:'View details';position:absolute;right:20px;top:34px;z-index:3;
+.dish-detail-btn{
+  position:absolute;right:20px;top:76px;z-index:4;
   font-size:9px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;
   color:var(--paper);border:1px solid rgba(240,235,227,.25);
   background:rgba(10,9,6,.34);backdrop-filter:blur(10px);
+  font-family:var(--sans);
   padding:7px 10px;opacity:0;transform:translateY(-4px);
   transition:opacity .3s ease,transform .3s ease;
-  pointer-events:none;
+  cursor:pointer;
 }
-.dish-card:hover::after{opacity:1;transform:translateY(0)}
+.dish-card:hover .dish-detail-btn,
+.dish-card:focus-within .dish-detail-btn{opacity:1;transform:translateY(0)}
 
 /* ── SPLIT IMAGE ── */
 .split{
@@ -933,6 +935,7 @@ footer{background:var(--ash);border-top:1px solid var(--line)}
   <div class="dishes-scroll" id="dishScroll">
     <div class="dish-card r">
       <img class="dish-img" src="assets/dish-tuna-tataki-card.webp" alt="Tuna tataki with sambal matah and kaffir lime snow" loading="lazy" decoding="async" width="720" height="480">
+      <button class="dish-detail-btn" type="button">View details</button>
       <div class="dish-overlay">
         <div class="dish-cat">Opening</div>
         <div class="dish-name">Tuna Tataki<br>Sambal Matah</div>
@@ -943,6 +946,7 @@ footer{background:var(--ash);border-top:1px solid var(--line)}
     </div>
     <div class="dish-card r d1">
       <img class="dish-img" src="assets/dish-wagyu-rendang-card.webp" alt="Wagyu rendang with crispy tempeh" loading="lazy" decoding="async" width="720" height="480">
+      <button class="dish-detail-btn" type="button">View details</button>
       <div class="dish-overlay">
         <div class="dish-cat">Main</div>
         <div class="dish-name">Wagyu<br>Rendang MS5</div>
@@ -953,6 +957,7 @@ footer{background:var(--ash);border-top:1px solid var(--line)}
     </div>
     <div class="dish-card r d2">
       <img class="dish-img" src="assets/dish-lobster-card.webp" alt="Whole lobster with rempah beurre and turmeric foam" loading="lazy" decoding="async" width="720" height="480">
+      <button class="dish-detail-btn" type="button">View details</button>
       <div class="dish-overlay">
         <div class="dish-cat">From The Sea</div>
         <div class="dish-name">Whole Lobster<br>Rempah Beurre</div>
@@ -963,6 +968,7 @@ footer{background:var(--ash);border-top:1px solid var(--line)}
     </div>
     <div class="dish-card r d3">
       <img class="dish-img" src="assets/dish-duck-confit-card.webp" alt="Duck confit in martabak shell with rooftop herbs" loading="lazy" decoding="async" width="720" height="480">
+      <button class="dish-detail-btn" type="button">View details</button>
       <div class="dish-overlay">
         <div class="dish-cat">Wood-Fire</div>
         <div class="dish-name">Duck Confit<br>Martabak Shell</div>
@@ -973,6 +979,7 @@ footer{background:var(--ash);border-top:1px solid var(--line)}
     </div>
     <div class="dish-card r d4">
       <img class="dish-img" src="assets/dish-pandan-souffle-card.webp" alt="Pandan souffle with coconut gelee and palm sugar caramel" loading="lazy" decoding="async" width="720" height="480">
+      <button class="dish-detail-btn" type="button">View details</button>
       <div class="dish-overlay">
         <div class="dish-cat">Closing</div>
         <div class="dish-name">Pandan Soufflé<br>Coconut Gelée</div>
@@ -983,6 +990,7 @@ footer{background:var(--ash);border-top:1px solid var(--line)}
     </div>
     <div class="dish-card r d1">
       <img class="dish-img" src="assets/dish-spice-negroni-card.webp" alt="Spice negroni with clove smoke and citrus oil" loading="lazy" decoding="async" width="720" height="480">
+      <button class="dish-detail-btn" type="button">View details</button>
       <div class="dish-overlay">
         <div class="dish-cat">Cocktail</div>
         <div class="dish-name">Spice Negroni<br>Clove Smoke</div>
@@ -993,6 +1001,7 @@ footer{background:var(--ash);border-top:1px solid var(--line)}
     </div>
     <div class="dish-card r d2">
       <img class="dish-img" src="assets/dish-nasi-bakar-card.webp" alt="Rice course inspired by Jakarta night markets" loading="lazy" decoding="async" width="720" height="480">
+      <button class="dish-detail-btn" type="button">View details</button>
       <div class="dish-overlay">
         <div class="dish-cat">Rice Course</div>
         <div class="dish-name">Nasi Bakar<br>Bone Marrow</div>
@@ -1003,6 +1012,7 @@ footer{background:var(--ash);border-top:1px solid var(--line)}
     </div>
     <div class="dish-card r d3">
       <img class="dish-img" src="assets/dish-short-rib-kluwek-card.webp" alt="Wood-fired short rib glazed with kluwek jus" loading="lazy" decoding="async" width="720" height="480">
+      <button class="dish-detail-btn" type="button">View details</button>
       <div class="dish-overlay">
         <div class="dish-cat">Wood-Fire</div>
         <div class="dish-name">Short Rib<br>Kluwek Jus</div>
@@ -1013,6 +1023,7 @@ footer{background:var(--ash);border-top:1px solid var(--line)}
     </div>
     <div class="dish-card r d4">
       <img class="dish-img" src="assets/dish-cacao-tart-card.webp" alt="Chocolate dessert with tamarind caramel and sea salt" loading="lazy" decoding="async" width="720" height="480">
+      <button class="dish-detail-btn" type="button">View details</button>
       <div class="dish-overlay">
         <div class="dish-cat">Dessert</div>
         <div class="dish-name">Cacao Tart<br>Tamarind Salt</div>
@@ -1451,7 +1462,7 @@ document.querySelectorAll('.r,.reveal-mask').forEach(el=>obs.observe(el));
 
 /* drag scroll on dishes */
 const ds=document.getElementById('dishScroll');
-let isDown=false,startX=0,scrollL=0,ignoreNextDishClick=false;
+let isDown=false,startX=0,scrollL=0,ignoreNextDishClick=false,suppressNextDishClick=false;
 if(ds){
   ds.addEventListener('pointerdown',e=>{
     isDown=true;
@@ -1460,9 +1471,18 @@ if(ds){
     startX=e.clientX;
     scrollL=ds.scrollLeft;
   });
-  ds.addEventListener('pointerup',()=>{
+  ds.addEventListener('pointerup',e=>{
     isDown=false;
-    if(ignoreNextDishClick)setTimeout(()=>{ignoreNextDishClick=false;},120);
+    const card=e.target.closest?.('.dish-card');
+    if(ignoreNextDishClick){
+      setTimeout(()=>{ignoreNextDishClick=false;},120);
+      return;
+    }
+    if(card){
+      suppressNextDishClick=true;
+      openCardDetail(card);
+      setTimeout(()=>{suppressNextDishClick=false;},0);
+    }
   });
   ds.addEventListener('pointercancel',()=>{
     isDown=false;
@@ -1572,6 +1592,18 @@ const detailData={
   }
 };
 function cleanTitle(text){return text.replace(/\s+/g,' ').trim();}
+function openCardDetail(card){
+  const title=cleanTitle(card.querySelector('.dish-name').innerText);
+  const base=detailData[title]||{};
+  openDetail({
+    kicker:card.querySelector('.dish-cat').innerText,
+    title,
+    desc:card.querySelector('.dish-desc').innerText,
+    price:card.querySelector('.dish-price').innerText,
+    image:card.querySelector('img').getAttribute('src'),
+    ...base
+  });
+}
 function openDetail(payload){
   detailEls.kicker.textContent=payload.kicker||'Menu Detail';
   detailEls.title.textContent=payload.title;
@@ -1596,19 +1628,10 @@ document.querySelectorAll('.dish-card').forEach(card=>{
   card.setAttribute('role','button');
   card.setAttribute('tabindex','0');
   card.addEventListener('click',()=>{
-    if(ignoreNextDishClick){
+    if(ignoreNextDishClick||suppressNextDishClick){
       return;
     }
-    const title=cleanTitle(card.querySelector('.dish-name').innerText);
-    const base=detailData[title]||{};
-    openDetail({
-      kicker:card.querySelector('.dish-cat').innerText,
-      title,
-      desc:card.querySelector('.dish-desc').innerText,
-      price:card.querySelector('.dish-price').innerText,
-      image:card.querySelector('img').getAttribute('src'),
-      ...base
-    });
+    openCardDetail(card);
   });
   card.addEventListener('keydown',e=>{
     if(e.key==='Enter'||e.key===' '){e.preventDefault();card.click();}
