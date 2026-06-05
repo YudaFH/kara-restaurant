@@ -70,8 +70,12 @@ nav{
   transition:padding .35s ease,background .35s ease,border-color .35s ease,backdrop-filter .35s ease,mix-blend-mode .35s ease;
 }
 nav.scrolled{
-  padding:22px 48px;background:transparent;
-  border-bottom:none;backdrop-filter:none;mix-blend-mode:difference;
+  padding:22px 48px;
+  background:rgba(10,9,6,.46);
+  border-bottom:1px solid rgba(240,235,227,.12);
+  backdrop-filter:blur(18px) saturate(125%);
+  -webkit-backdrop-filter:blur(18px) saturate(125%);
+  mix-blend-mode:normal;
 }
 .n-logo{
   font-family:'Playfair Display',serif;font-size:22px;font-weight:900;
