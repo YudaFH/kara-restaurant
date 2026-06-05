@@ -1465,26 +1465,20 @@ document.querySelectorAll('.r,.reveal-mask').forEach(el=>obs.observe(el));
 
 /* drag scroll on dishes */
 const ds=document.getElementById('dishScroll');
-let isDown=false,startX=0,scrollL=0,ignoreNextDishClick=false,suppressNextDishClick=false;
+let isDown=false,startX=0,scrollL=0,ignoreNextDishClick=false;
 if(ds){
   ds.addEventListener('pointerdown',e=>{
+    if(e.target.closest?.('.dish-detail-btn'))return;
     isDown=true;
     ignoreNextDishClick=false;
     ds.setPointerCapture(e.pointerId);
     startX=e.clientX;
     scrollL=ds.scrollLeft;
   });
-  ds.addEventListener('pointerup',e=>{
+  ds.addEventListener('pointerup',()=>{
     isDown=false;
-    const card=e.target.closest?.('.dish-card');
     if(ignoreNextDishClick){
       setTimeout(()=>{ignoreNextDishClick=false;},120);
-      return;
-    }
-    if(card){
-      suppressNextDishClick=true;
-      openCardDetail(card);
-      setTimeout(()=>{suppressNextDishClick=false;},0);
     }
   });
   ds.addEventListener('pointercancel',()=>{
@@ -1631,10 +1625,20 @@ document.querySelectorAll('.dish-card').forEach(card=>{
   card.setAttribute('role','button');
   card.setAttribute('tabindex','0');
   card.addEventListener('click',()=>{
-    if(ignoreNextDishClick||suppressNextDishClick){
+    if(ignoreNextDishClick){
       return;
     }
     openCardDetail(card);
+  });
+  card.querySelector('.dish-detail-btn')?.addEventListener('pointerdown',e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    ignoreNextDishClick=false;
+    openCardDetail(card);
+  });
+  card.querySelector('.dish-detail-btn')?.addEventListener('click',e=>{
+    e.preventDefault();
+    e.stopPropagation();
   });
   card.addEventListener('keydown',e=>{
     if(e.key==='Enter'||e.key===' '){e.preventDefault();card.click();}
